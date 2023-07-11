@@ -13,7 +13,7 @@ const realEstateSchema = z.object({
     updatedAt: z.string().or(z.date()).optional()
 });
 const realEstateResponseSchema = z.object({
-    id: z.number().positive(),
+    id: z.number().positive(), 
     value: z.union([z.number().positive().default(0), z.string()]),
     size: z.number().positive().int(),
     address: addressSchema,

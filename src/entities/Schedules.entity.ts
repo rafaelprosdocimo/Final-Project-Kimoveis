@@ -13,6 +13,9 @@ export class Schedule {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
+  @Column({ type: "date" })
+  date: string | Date;
+
   @Column({ type: "time" })
   hour: string;
 

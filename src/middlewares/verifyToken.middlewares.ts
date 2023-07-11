@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { AppError } from "../errors";
-import { verify } from "jsonwebtoken";
+import { decode, verify } from "jsonwebtoken";
 
 export const verifyToken = (
   req: Request,
@@ -12,10 +12,22 @@ export const verifyToken = (
 
   const [_bearer, token]: Array<string> = authorization.split(" ");
 
-  res.locals = {
-    ...res.locals,
-    decoded: verify(token, process.env.SECRET_KEY!),
-  };
+  // res.locals = {
+  //   ...res.locals,
+  //   decoded: verify(token, process.env.SECRET_KEY!),
+  //   userId: decode.sub
+  // };
+
+  verify(token, process.env.SECRET_KEY!, (err, decoded: any)=>{
+    if(err) throw new AppError(err.message, 401);
+    res.locals = {
+      ...res.locals,
+      decoded,
+      userId: decoded.sub,
+      admin: decoded.admin
+    }; 
+  });
+
 
   return next();
 };

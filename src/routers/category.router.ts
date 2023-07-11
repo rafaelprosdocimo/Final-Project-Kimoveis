@@ -7,7 +7,7 @@ export const categoryRouter: Router = Router();
 
 categoryRouter.post(
   "",
-  middlewares.verifyToken,
+  middlewares.verifyToken, 
   middlewares.verifyUserPermission,
   middlewares.validateBody(categoryCreateSchema),
   middlewares.uniqueCategory,
@@ -21,7 +21,7 @@ categoryRouter.get(
 
 categoryRouter.get(
   "/:id/realEstate",
-  middlewares.verifyIdExists,
+  middlewares.verifyCategoriesExists,
   categoryControllers.readRealEstatesById
-);
+); 
 

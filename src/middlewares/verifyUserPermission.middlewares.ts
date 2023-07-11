@@ -7,7 +7,7 @@ import { verify } from "jsonwebtoken";
     res: Response,
     next: NextFunction
   ): void => {
-    const admin: boolean = res.locals.decoded.admin;
+    const admin: boolean = res.locals.admin;
     if (!admin) throw new AppError("Insufficient permission", 403);
   
     return next();

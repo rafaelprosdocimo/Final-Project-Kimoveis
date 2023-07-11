@@ -1,10 +1,11 @@
 import  { UserCreate, UserRead, UserReturn, UserUpdate, UserRepo } from "./user.interfaces";
 import { SessionCreate , SessionReturn} from "./session.interfaces";
-import { categoryCreate, categoryReturn } from "./category.interfaces";
+import { categoryCreate, categoryReturn , returnRealEstateByCategory} from "./category.interfaces";
 import { RealEstateCreate, RealEstateResult, RealEstatesRead , RealEstateResponse} from "./realEstate.interfaces";
 import { ScheduleCreate, ScheduleResult } from "./schedueles.interfaces";
 import { TAddressCreate, TAddressResult , TAddressesRead, TAddressCreateNumber} from "./address.interface";
 export {
+  returnRealEstateByCategory,
     TAddressCreateNumber,
     RealEstateResponse,
     TAddressesRead,

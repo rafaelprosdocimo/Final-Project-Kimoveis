@@ -16,7 +16,7 @@ const readRealEstatesById = async (req: Request, res: Response): Promise<Respons
   const categoryId = Number(req.params.id);
 
   const readRealEstates = await categoryServices.findRealEstatesById(categoryId);
-  return res.status(200).json(readRealEstates);
+  return res.status(200).json(readRealEstates); 
 };
 
 export default { create , readAll, readRealEstatesById};

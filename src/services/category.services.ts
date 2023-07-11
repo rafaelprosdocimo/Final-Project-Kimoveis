@@ -1,8 +1,9 @@
 import { Category, RealEstate } from "../entities";
-import { categoryCreate } from "../interfaces";
+import { categoryCreate, returnRealEstateByCategory } from "../interfaces";
 import { categoryRepository, realEstateRepository } from "../repositories";
+import { returnRealEstateByCategorySchema } from "../schemas";
 
-const create = async (payload: categoryCreate): Promise<Category> => {
+const create = async (payload: categoryCreate): Promise<Category> => { 
   const category: Category = categoryRepository.create(payload);
   await categoryRepository.save(category);
 
@@ -14,12 +15,15 @@ const findAll = async (): Promise<Array<Category>> => {
   return categories;
 };
 
-const findRealEstatesById = async (categoryId: number): Promise<RealEstate[]> => {
-  const realEstates = await realEstateRepository
-  .createQueryBuilder("realEstate")
-  .innerJoinAndSelect("realEstate.category", "category", "category.id = :categoryId", { categoryId })
-  .getMany();
-  return realEstates;
+const findRealEstatesById = async (categoryId: number): Promise<returnRealEstateByCategory> => {
+  const realEstates = await categoryRepository.findOne({
+    where: { id: categoryId },
+    relations: {
+      realEstate: true,
+    },
+  });
+  const realEstatesReturn = returnRealEstateByCategorySchema.parse(realEstates);
+  return realEstatesReturn;
 }
 
 export default { create , findAll, findRealEstatesById};

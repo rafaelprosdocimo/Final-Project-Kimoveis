@@ -9,5 +9,16 @@ const categoryCreateSchema = categorySchema.omit({
     id: true
 });
 
+const returnRealEstateByCategorySchema = categorySchema.extend({
+    realEstate: z.object({
+      id: z.number(),
+      value: z.string().or(z.number()),
+      size: z.number(),
+      sold: z.boolean(),
+      createdAt: z.string(),
+      updatedAt: z.string()
+    }).array()
+  });
 
-export { categorySchema , categoryCreateSchema};
+
+export { categorySchema , categoryCreateSchema, returnRealEstateByCategorySchema};

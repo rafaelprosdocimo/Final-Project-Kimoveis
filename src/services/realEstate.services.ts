@@ -1,7 +1,7 @@
 import { RealEstateResult, RealEstateCreate, RealEstateResponse } from "../interfaces";
 import {addressRepository, categoryRepository, realEstateRepository } from "../repositories";
 
-const create = async (payload: any): Promise<any> => {
+const create = async (payload: any): Promise<RealEstateResponse> => {
     const newAddress = addressRepository.create(payload.address);
     await addressRepository.save(newAddress);
 
